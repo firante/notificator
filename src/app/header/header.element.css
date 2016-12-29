@@ -1,0 +1,7 @@
+.header__element {
+    background-color: #04F992;
+    height: 40px;
+    .header__element__text-content {
+	color: #D66853;
+    }
+}
