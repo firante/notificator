@@ -1,7 +1,30 @@
 .header__element {
-    background-color: #04F992;
-    height: 40px;
+    padding: 13px;
+    cursor: pointer;
+    display: inline-block;
     .header__element__text-content {
 	color: #D66853;
     }
+}
+
+.header__element:hover:after {
+    transform: scaleX(1);
+}
+
+.header__element:after {
+    display: block;
+    content: '';
+    padding: 0 0 13px 0;
+    margin: 0 -10px 0 -10px;
+    border-bottom: solid 2px green;
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }

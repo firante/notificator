@@ -1,7 +1,22 @@
+.header {
+    background-color: rgb(80, 220, 140);
+    box-shadow: 0px 2px 4px 0px rgba(10, 140, 60, 0.9);
+    height: 45px;
+    padding-top: 10px 0 0 0;
+}
 
 .float-left {
     float: left;
- }
-.float-right {
-    float: right;
+}
+
+.size-percent-50 {
+    width: 50%;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }

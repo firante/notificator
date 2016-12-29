@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component ({
     selector: 'header-element',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./header.element.css']
 })
 
-export class HeaderElement { }
+export class HeaderElement {
+    @Input() text: string;
+}
