@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "start": "webpack-dev-server --line --progress --port 8080",
-      "postinstall" : "typings install"
+    "start": "webpack-dev-server --line --progress --port 8080",
+    "postinstall": "typings install"
   },
   "keywords": [],
   "author": "",

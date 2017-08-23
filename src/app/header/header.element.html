@@ -1,3 +1,5 @@
-<div [ngClass]="text !== 'Log in'?'float-left header__element':'float-right header__element'">
+<div
+   [ngClass]="text !== 'Log in'?'float-left header__element':'float-right header__element'"
+   routerLink="{{getRoute()}}">
   <span class='header__element__text-content'>{{ text }}</span>
 </div>
