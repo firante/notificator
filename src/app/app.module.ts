@@ -8,6 +8,8 @@ import { LoginComponent } from './body/main-component/login.component';
 import { EventsComponent } from './body/main-component/events.component';
 import { HomeComponent } from './body/main-component/home.component';
 import { LoginService } from './_services/login/login.service';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 const routes = [
   { path: 'home', component: HomeComponent},
@@ -19,7 +21,9 @@ const routes = [
 @NgModule ({
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,

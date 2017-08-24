@@ -1,8 +1,8 @@
 <div>
-  <form>
-    <input type="text" placeholder="username..." />
-    <input type="text" placeholder="passvord..." />
-    <input type="text" placeholder="username..." />
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value, email.value)">
+    <input #username type="text" placeholder="username..." />
+    <input #password type="password" placeholder="passvord..." />
+    <input #email type="email" placeholder="email..." />
     <input type="submit" class="submit"/>
   </form>
 </div>
