@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderMain } from './header/header';
 import { HeaderElement } from './header/header.element';
 import { LoginComponent } from './body/main-component/login.component';
+import { RegisterComponent } from './body/main-component/register.component';
 import { EventsComponent } from './body/main-component/events.component';
 import { HomeComponent } from './body/main-component/home.component';
 import { LoginService } from './_services/login/login.service';
@@ -15,6 +16,7 @@ const routes = [
   { path: 'home', component: HomeComponent},
   { path: 'events', component: EventsComponent},
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -30,6 +32,7 @@ const routes = [
     HeaderMain,
     HeaderElement,
     LoginComponent,
+    RegisterComponent,
     EventsComponent,
     HomeComponent
   ],

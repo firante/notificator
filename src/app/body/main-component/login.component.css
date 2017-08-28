@@ -1,0 +1,26 @@
+.login_container {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login_container input {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.login_register {
+  width: 50%;
+  float: left;
+  font-size: 12px;
+  margin-top: 10px;
+  text-align: left;
+}
+.login_register:last-child {
+  text-align: right;
+}
+@media screen and (max-width: 997px) {
+  .login_container {
+    width: 80%;
+  }
+}
