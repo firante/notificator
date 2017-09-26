@@ -12,7 +12,7 @@ export class LoginComponent {
   
   onSubmit(e: any, username: any, password: any) {
     e.preventDefault();
-    const loginData = { username, password };
-    this.loginService.auth(loginData);
+    // const loginData = { username, password };
+    // this.loginService.auth(loginData);
   }  
 }

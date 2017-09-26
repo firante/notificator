@@ -4,6 +4,7 @@
     <header-element text="Events"></header-element>
   </div>
   <div class='float-left size-percent-50 text-right'>
+    <div *ngIf="isLogin()">{{getUserName()}}</div>
     <header-element text="Log in"></header-element>
   </div>
 </header>

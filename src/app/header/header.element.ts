@@ -11,6 +11,15 @@ export class HeaderElement {
   @Input() text: string;
   
   constructor(private loginService: LoginService) {}
+
+  getText(): string {
+    if(this.text === 'Log in') {
+      if(this.loginService.username) {
+	return 'Log out';
+      }
+    }
+    return this.text;
+  }
   
   getRoute(): string {
     return this.text === 'Log in' ? '/login' : this.text === 'Events' ? '/events' : '/home';

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderElement } from './header.element';
+import { LoginService } from '../_services/login/login.service';
 
 @Component ({
     selector: 'header-main',
@@ -7,4 +8,15 @@ import { HeaderElement } from './header.element';
     styleUrls: ['./header.css']
 })
 
-export class HeaderMain { }
+export class HeaderMain {
+  constructor(private loginService: LoginService) {}
+
+  isLogin(): boolean {
+    return this.loginService.loggedIn;
+  }
+
+  getUserName(): string {
+    return this.loginService.username;
+  }
+  
+}

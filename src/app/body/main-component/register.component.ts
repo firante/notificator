@@ -10,9 +10,9 @@ export class RegisterComponent {
 
   constructor(private loginService: LoginService) {}
   
-  onSubmit(e: any, username: any, email: any, password: any, confirm_password: any) {
+  onSubmit(e: any, username: any, password: any, email: any) {
     e.preventDefault();
-    const loginData = { username, email, password, confirm_password };
+    const loginData = { username, password, email };
     this.loginService.auth(loginData);
   }  
 }
