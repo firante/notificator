@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './_services/login/login.service';
 import '../assets/css/styles.css';
 
 @Component ({
@@ -7,4 +8,9 @@ import '../assets/css/styles.css';
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent { }
+export class AppComponent {
+  constructor(private loginService: LoginService) {}
+  ngOnInit() {
+    this.loginService.autoLogin();
+  }
+}

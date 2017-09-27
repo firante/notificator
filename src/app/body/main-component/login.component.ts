@@ -10,9 +10,9 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService) {}
   
-  onSubmit(e: any, username: any, password: any) {
+  onSubmit(e: any, email: string, password: string) {
     e.preventDefault();
-    // const loginData = { username, password };
-    // this.loginService.auth(loginData);
+    const loginData = { email, password };
+    this.loginService.login(loginData);
   }  
 }

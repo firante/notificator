@@ -40,4 +40,45 @@ export class LoginService {
       })
       .catch(err => console.log(err));
   }
+
+  autoLogin () {
+    const token = window.localStorage.getItem('token');
+    const url = 'http://localhost:9999/autologin';
+    const body = { token };
+    this._http.post(url, body)
+      .toPromise()
+      .then((res) => {
+	const result = res && res._body && JSON.parse(res._body);
+	if(result.login_status) {
+	  this._loggedIn = true;
+	  this._token = token;
+	  this._username = result.username;
+	} else {
+	  console.log(result.message);
+	}
+      })
+      .catch(err => console.log(err));
+  }
+
+  login({ email, password }: {email: string, password: string }) {
+    const url = 'http://localhost:9999/login';
+    const body = { email, password };
+    this._http.post(url, { body })
+      .toPromise()
+      .then((res) => {
+	const result = res && res._body && JSON.parse(res._body);
+	this._loggedIn = true;
+	this._token = result.token;
+	this._username = result.username;
+	window.localStorage.setItem('token', result.token);
+      })
+      .catch(err => console.log(err));
+  }
+
+  logout() {
+    this._loggedIn = false;
+    this._token = '';
+    this._username = '';
+    window.localStorage.removeItem('token');
+  }
 }

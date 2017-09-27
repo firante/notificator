@@ -20,3 +20,8 @@
 .text-right {
     text-align: right;
 }
+
+.hello_section {
+  padding: 13px;
+  float: right;
+}

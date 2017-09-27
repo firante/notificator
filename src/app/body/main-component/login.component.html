@@ -1,6 +1,6 @@
 <div class="login_container">
-  <form class="login_form" #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value)">
-    <input #username type="text" placeholder="username..." />
+  <form class="login_form" #loginForm="ngForm" (ngSubmit)="onSubmit($event, email.value, password.value)">
+    <input #email type="email" placeholder="email..." />
     <input #password type="password" placeholder="passvord..." />
     <input type="submit" class="submit" value="Log in"/>
   </form>
