@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -64,15 +64,31 @@ export class LoginService {
   }
 
   login({ email, password }: {email: string, password: string }) {
-    const url = 'http://localhost:9999/login';
-    const body = { email, password };
-    this._http.post(url, { body })
+    const url = 'http://localhost:9999/graphql';
+    const body = `{
+      user(queryType: "login", email: "${email}", password: "${password}") {
+	id
+	profile {
+	  token
+	  username
+	}
+      }
+    }`;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/graphql');
+    const requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      headers
+    });
+    this._http.post(url, body, {headers, method: 'POST'})
       .toPromise()
       .then((res) => {
 	const result = res && res._body && JSON.parse(res._body);
-	this._loggedIn = true;
-	this._token = result.token;
-	this._username = result.username;
+	if(result.data.user.profile.token) {
+	  this._loggedIn = true;
+	  this._token = result.data.user.profile.token;
+	  this._username = result.data.user.profile.username;
+	}
 	window.localStorage.setItem('token', result.token);
 	this.router.navigate(['/home']);
       })
