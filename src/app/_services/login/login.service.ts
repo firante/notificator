@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -8,7 +9,7 @@ export class LoginService {
   private _token: string = '';
   private _username: string = '';
   
-  constructor(private _http: Http) {}
+  constructor(private _http: Http, private router: Router) {}
   
   get loggedIn(): boolean {
     return this._loggedIn;
@@ -37,6 +38,7 @@ export class LoginService {
 	this._token = result.token;
 	this._username = result.username;
 	window.localStorage.setItem('token', result.token);
+	this.router.navigate(['/home']);
       })
       .catch(err => console.log(err));
   }
@@ -53,6 +55,7 @@ export class LoginService {
 	  this._loggedIn = true;
 	  this._token = token;
 	  this._username = result.username;
+	  this.router.navigate(['/home']);
 	} else {
 	  console.log(result.message);
 	}
@@ -71,6 +74,7 @@ export class LoginService {
 	this._token = result.token;
 	this._username = result.username;
 	window.localStorage.setItem('token', result.token);
+	this.router.navigate(['/home']);
       })
       .catch(err => console.log(err));
   }
@@ -80,5 +84,6 @@ export class LoginService {
     this._token = '';
     this._username = '';
     window.localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
