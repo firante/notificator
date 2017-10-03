@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -45,19 +45,32 @@ export class LoginService {
 
   autoLogin () {
     const token = window.localStorage.getItem('token');
-    const url = 'http://localhost:9999/autologin';
-    const body = { token };
-    this._http.post(url, body)
+    const url = 'http://localhost:9999/graphql';
+    const body = `{
+      user(token: "${token}") {
+	profile {
+	  token
+	  username
+	}
+      }
+    }`;
+    
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/graphql');
+    
+    this._http.post(url, body, { headers })
       .toPromise()
       .then((res) => {
+	console.log(res)
 	const result = res && res._body && JSON.parse(res._body);
-	if(result.login_status) {
+	const user = result.data.user;
+	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
-	  this._token = token;
-	  this._username = result.username;
+	  this._token = user.profile.token;
+	  this._username = user.profile.username;
 	  this.router.navigate(['/home']);
 	} else {
-	  console.log(result.message);
+	  console.log('There is no valid token!');
 	}
       })
       .catch(err => console.log(err));
@@ -67,7 +80,6 @@ export class LoginService {
     const url = 'http://localhost:9999/graphql';
     const body = `{
       user(queryType: "login", email: "${email}", password: "${password}") {
-	id
 	profile {
 	  token
 	  username
@@ -76,21 +88,20 @@ export class LoginService {
     }`;
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
-    const requestOptions = new RequestOptions({
-      method: RequestMethod.Post,
-      headers
-    });
-    this._http.post(url, body, {headers, method: 'POST'})
+    this._http.post(url, body, { headers })
       .toPromise()
       .then((res) => {
 	const result = res && res._body && JSON.parse(res._body);
-	if(result.data.user.profile.token) {
+	const user = result.data.user;
+	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
-	  this._token = result.data.user.profile.token;
-	  this._username = result.data.user.profile.username;
+	  this._token = user.profile.token;
+	  this._username = user.profile.username;
+	  window.localStorage.setItem('token', user.profile.token);
+	  this.router.navigate(['/home']);
+	} else {
+	  console.log('Login or password are incorrect!');
 	}
-	window.localStorage.setItem('token', result.token);
-	this.router.navigate(['/home']);
       })
       .catch(err => console.log(err));
   }
