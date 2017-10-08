@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
+import { autoLogin, login } from '../../querys-and-mutations/querys.js';
+import { createUser } from '../../querys-and-mutations/mutations.js';
+
 @Injectable()
 
 export class LoginService {
@@ -28,17 +31,28 @@ export class LoginService {
   }
   
   auth({ username, password, email }: {username: string, password: string, email: string}) {
-    const url = 'http://localhost:9999/register';
-    const body = { username, password, email };
-    this._http.post(url, { body })
+    const url = 'http://localhost:9999/graphql';
+    const body = createUser(username, email, password);
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/graphql');
+    
+    this._http.post(url, body, { headers })
       .toPromise()
       .then((res) => {
 	const result = res && res._body && JSON.parse(res._body);
-	this._loggedIn = true;
-	this._token = result.token;
-	this._username = result.username;
-	window.localStorage.setItem('token', result.token);
-	this.router.navigate(['/home']);
+	const user = result.data.createUser;
+	if(user && user.profile && user.profile.token) {
+	  this._loggedIn = true;
+	  this._token = user.profile.token;
+	  this._username = user.profile.username;
+	  window.localStorage.setItem('token', user.profile.token);
+	  this.router.navigate(['/home']);
+	} else if (user && user.status)	{
+	   console.log(user.status);
+	} else {
+	  console.log('Registration failed!');
+	}
       })
       .catch(err => console.log(err));
   }
@@ -46,14 +60,7 @@ export class LoginService {
   autoLogin () {
     const token = window.localStorage.getItem('token');
     const url = 'http://localhost:9999/graphql';
-    const body = `{
-      user(token: "${token}") {
-	profile {
-	  token
-	  username
-	}
-      }
-    }`;
+    const body = autoLogin(token);
     
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
@@ -61,7 +68,6 @@ export class LoginService {
     this._http.post(url, body, { headers })
       .toPromise()
       .then((res) => {
-	console.log(res)
 	const result = res && res._body && JSON.parse(res._body);
 	const user = result.data.user;
 	if(user && user.profile && user.profile.token) {
@@ -78,16 +84,11 @@ export class LoginService {
 
   login({ email, password }: {email: string, password: string }) {
     const url = 'http://localhost:9999/graphql';
-    const body = `{
-      user(queryType: "login", email: "${email}", password: "${password}") {
-	profile {
-	  token
-	  username
-	}
-      }
-    }`;
+    const body = login(email, password);
+      
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
+    
     this._http.post(url, body, { headers })
       .toPromise()
       .then((res) => {

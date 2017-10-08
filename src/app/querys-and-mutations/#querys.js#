@@ -1,0 +1,18 @@
+exports.autoLogin = (token) => `query {
+      user(token: "${token}") {
+	profile {
+	  token
+	  username
+	}
+      }
+    }`;
+
+exports.login = (email, password) => `query {
+      user(email: "${email}", password: "${password}") {
+	profile {
+	  token
+	  username
+	}
+      }
+    }`;
+
