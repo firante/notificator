@@ -8,6 +8,8 @@ import { LoginComponent } from './body/main-component/login.component';
 import { RegisterComponent } from './body/main-component/register.component';
 import { EventsComponent } from './body/main-component/events.component';
 import { HomeComponent } from './body/main-component/home.component';
+import { CalendarComponent } from './body/calendar/calendar.component';
+import { TrCalendar } from './body/calendar/tr.calendar';
 import { LoginService } from './_services/login/login.service';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -34,7 +36,9 @@ const routes = [
     LoginComponent,
     RegisterComponent,
     EventsComponent,
-    HomeComponent
+    HomeComponent,
+    CalendarComponent,
+    TrCalendar
   ],
   providers: [LoginService],
   bootstrap: [ AppComponent ]
