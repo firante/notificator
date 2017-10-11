@@ -1,0 +1,1 @@
+<td  [ngClass]="{'days': item.day, 'days-header': !item.day, 'none-active-days': item.day && !item.current}" *ngFor="let item of getTdItem()">{{item.day || item}}</td>

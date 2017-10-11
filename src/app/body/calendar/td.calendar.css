@@ -1,0 +1,18 @@
+td {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.days {
+  background-color: red;
+}
+
+.days-header {
+  background-color: green;
+}
+
+.none-active-days {
+  color: grey;
+}

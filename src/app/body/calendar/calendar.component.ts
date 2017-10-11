@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import Calendar from '../../_services/calendar/calendar';
 import { getFullMonth, getShortDays } from '../../_services/helpers';
+import Calendar from '../../_services/calendar/calendar';
 
 @Component ({
     selector: 'calendar-component',
@@ -9,20 +9,37 @@ import { getFullMonth, getShortDays } from '../../_services/helpers';
     styleUrls: ['./calendar.component.css']
 })
 
-export class CalendarComponent {
-  constructor() {}
+export class CalendarComponent implements OnInit {
+  constructor(private calendar: Calendar) {}
 
-  // getCalendar() {
-  //   this.calendar.currentCalendarState;
-  // }
-
-  getFullYear() {
-    this.getFullYear();
-  }
-
-  getShortDay() {
-    this.getShortDay();
+  ngOnInit() {
+    this.calendar.calendarState === 'month'
+      && this.calendar.calculateMonthState()
+      && this.calendar.activateMonthState();
   }
   
+  getCalendar() {
+    return this.calendar.currentCalendarState;
+  }
+
+  getFullMonth() {
+    return getFullMonth(this.calendar.currentMonth);
+  }
+
+  getShortDays() {
+    return getShortDays();
+  };
+
+  getCurrentYear(): any {
+    return this.calendar.currentYear;
+  }
+  
+  clickMonthBack() {
+    this.calendar.currentMonth = this.calendar.currentMonth - 1;
+  }
+
+  clickMonthNext() {
+    this.calendar.currentMonth = this.calendar.currentMonth + 1;
+  }
 }
 

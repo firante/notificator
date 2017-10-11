@@ -1,8 +1,9 @@
 <table>
   <tr>
-    <td><</td>
-    <td colspan="5">{{ getFullYear() }}</td>
-    <td>></td>
+    <td (click)="clickMonthBack()"><</td>
+    <td colspan="5">{{ getFullMonth() }}, {{getCurrentYear()}}</td>
+    <td (click)="clickMonthNext()">></td>
   </tr>
-  <tr-calendar data="{{getShortDay()}}"></tr-calendar>
+  <tr td-calendar [tdItem]="getShortDays()"></tr>
+  <tr *ngFor="let row of getCalendar()" td-calendar [tdItem]="row"></tr>
 </table>
