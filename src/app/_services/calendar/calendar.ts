@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable()
 
-export default class Calendar {
+export default class Calendar implements OnInit {
   private _currentCalendarState: any[][];
   private _currentDate: any;
   private _currentMonth: any;
   private _currentYear: any;
   private _calendarState: string;
   private _monthState: any[6][7];
+  private _yearState: any[][];
 
   constructor() {
     const date = new Date();
@@ -17,7 +18,9 @@ export default class Calendar {
     this._currentMonth = date.getMonth();
     this._calendarState = 'month';
   }
-    
+
+  ngOnInit() { }
+  
   get currentCalendarState(): any {
     return this._currentCalendarState;
   }
@@ -29,17 +32,16 @@ export default class Calendar {
   get currentYear(): any {
     return this._currentYear;
   }
-
   
   get calendarState(): string {
     return this._calendarState;
   }
 
-  set calendarState(calendarState): void {
+  set calendarState(calendarState) {
     this._calendarState = calendarState;
   }
 
-  set currentMonth(newMonth): void {
+  set currentMonth(newMonth) {
     if(parseInt(newMonth, 10) === -1) {
       this._currentMonth = 11;
       this._currentYear = this._currentYear - 1;
@@ -49,7 +51,7 @@ export default class Calendar {
     } else {
       this._currentMonth = newMonth;
     }
-    this.calendarState === 'month'
+    this._calendarState === 'month'
       && this.calculateMonthState()
       && this.activateMonthState();
   }
@@ -76,9 +78,32 @@ export default class Calendar {
     }
   }
 
+  calculateYearsState() {
+    try {
+      this._yearState = [
+	['Jan','Feb','Mar','Apr'],
+	['May', 'Jun', 'Jul', 'Aug'],
+	['Sept', 'Oct', 'Nov', 'Dec']
+      ];
+      
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   activateMonthState() {
     try {
       this._currentCalendarState = this._monthState;
+      return true;
+    } catch(err) {
+      console.log(err);
+      return false;
+    }
+  }
+
+   activateYearState() {
+    try {
+      this._currentCalendarState = this._yearState;
       return true;
     } catch(err) {
       console.log(err);

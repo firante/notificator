@@ -1,1 +1,7 @@
-<td  [ngClass]="{'days': item.day, 'days-header': !item.day, 'none-active-days': item.day && !item.current}" *ngFor="let item of getTdItem()" (click)="dayClick(item)">{{item.day || item}}</td>
+<td  [ngClass]="{'td_month_body': getCalendarState() === 'month',
+		'days': item.day,
+		'days-header': !item.day,
+		'none-active-days': item.day && !item.current,
+		'td_year_body': getCalendarState() === 'years'}"
+     *ngFor="let item of getTdItem()"
+     (click)="dayClick(item)"> {{item.day || item}} </td>

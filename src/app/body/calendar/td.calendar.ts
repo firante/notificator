@@ -11,7 +11,7 @@ selector: '[td-calendar]',
 
 export class TdCalendar implements OnInit {
   constructor(private calendar: Calendar) { }
-  @Input() tdItem: any[];
+  @Input() tdItem: string;
 
   ngOnInit() { }
   
@@ -19,7 +19,12 @@ export class TdCalendar implements OnInit {
     return this.tdItem;
   }
 
-  dayClick(item): void {
+  getCalendarState(): string {
+    return this.calendar.calendarState;
+  }
+
+  
+  dayClick(item: any): void {
     if (item && item.day && !item.current) {
       const day = parseInt(item.day, 10);
       if (day > 15) {

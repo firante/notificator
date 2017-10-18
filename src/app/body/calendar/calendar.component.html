@@ -1,9 +1,11 @@
 <table>
   <tr>
     <td (click)="clickMonthBack()"><</td>
-    <td colspan="5">{{ getFullMonth() }}, {{getCurrentYear()}}</td>
+    <td *ngIf="getCalendarState() === 'month'" colspan="5" (click)="toYear()">{{ getFullMonth() }}, {{getCurrentYear()}}</td>
+    <td *ngIf="getCalendarState() === 'years'" colspan="2" (click)="toYear()">{{ getFullMonth() }}, {{getCurrentYear()}}</td>
     <td (click)="clickMonthNext()">></td>
   </tr>
-  <tr td-calendar [tdItem]="getShortDays()"></tr>
+  <tr *ngIf="getCurrentState() === 'month'" td-calendar [tdItem]="getShortDays()"></tr>
   <tr *ngFor="let row of getCalendar()" td-calendar [tdItem]="row"></tr>
+  <tr><td colspan="7">Today</td></tr>
 </table>

@@ -1,8 +1,16 @@
 td {
-  width: 30px;
-  height: 30px;
   cursor: pointer;
   user-select: none;
+}
+
+.td_month_body {
+  height: 35px;
+  width: 14.3%;
+}
+
+.td_year_body {
+  height: 35px;
+  width: 25%;
 }
 
 .days {

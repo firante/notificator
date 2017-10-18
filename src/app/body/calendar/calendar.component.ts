@@ -22,6 +22,10 @@ export class CalendarComponent implements OnInit {
     return this.calendar.currentCalendarState;
   }
 
+  getCalendarState(): string {
+    return this.calendar.calendarState;
+  }
+  
   getFullMonth() {
     return getFullMonth(this.calendar.currentMonth);
   }
@@ -33,13 +37,23 @@ export class CalendarComponent implements OnInit {
   getCurrentYear(): any {
     return this.calendar.currentYear;
   }
+
+  getCurrentState(): string {
+    return this.calendar.calendarState;
+  }
   
-  clickMonthBack() {
+  clickMonthBack(): void {
     this.calendar.currentMonth = this.calendar.currentMonth - 1;
   }
 
-  clickMonthNext() {
+  clickMonthNext(): void {
     this.calendar.currentMonth = this.calendar.currentMonth + 1;
+  }
+
+  toYear() {
+    this.calendar.calendarState = 'years';
+    this.calendar.calculateYearsState();
+    this.calendar.activateYearState();
   }
 }
 
