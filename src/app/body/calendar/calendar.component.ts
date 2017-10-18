@@ -51,7 +51,7 @@ export class CalendarComponent implements OnInit {
   }
 
   toYear() {
-    this.calendar.calendarState = 'years';
+    this.calendar.calendarState = 'year';
     this.calendar.calculateYearsState();
     this.calendar.activateYearState();
   }

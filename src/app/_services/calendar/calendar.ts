@@ -49,7 +49,7 @@ export default class Calendar implements OnInit {
       this._currentMonth = 0;
       this._currentYear = this._currentYear + 1;
     } else {
-      this._currentMonth = newMonth;
+      this._currentMonth = parseInt(newMonth, 10);
     }
     this._calendarState === 'month'
       && this.calculateMonthState()
