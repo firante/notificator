@@ -1,8 +1,9 @@
-<td  [ngClass]="{'td_month_body': getCalendarState() === 'month',
+<td  [ngClass]="{'td-month-body': getCalendarState() === 'month',
 		'days': item.day,
 		'days-header': !item.day,
 		'none-active-days': item.day && !item.current,
-		'td_year_body': getCalendarState() === 'year'}"
+		'td-year-body': getCalendarState() === 'year'
+		'active-item': isItemActive(item)}"
      *ngFor="let item of getTdItem()"
      (click)="dayClick(item)"> {{item.day || item}}
 </td>

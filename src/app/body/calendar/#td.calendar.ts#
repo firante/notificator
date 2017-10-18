@@ -54,6 +54,13 @@ export class TdCalendar implements OnInit {
       this.calendar.activateCurrentCalendarState();
       
     } else {}
-  
+  }
+
+  isItemActive(item) {
+    if(this.calendar.calendarState === 'age') {
+      return this.calendar.selectedYear === this.calendar.currentYear;
+    } else if(this.calendar.calendarState === 'year') {
+      return () && ();
+    }
   }
 }

@@ -3,13 +3,14 @@ td {
   user-select: none;
 }
 
-.td_month_body {
-  height: 35px;
+.td-month-body {
+  padding: 0;
+  height: 30px;
   width: 14.3%;
 }
 
-.td_year_body {
-  height: 35px;
+.td-year-body {
+  height: 70px;
   width: 25%;
 }
 
