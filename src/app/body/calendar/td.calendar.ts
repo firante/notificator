@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { getMonthNomberByShortName } from '../../_services/helpers';
+import { getMonthNumberByShortName } from '../../_services/helpers';
 import Calendar from '../../_services/calendar/calendar';
 
 @Component ({
@@ -35,15 +35,14 @@ export class TdCalendar implements OnInit {
 	}
       } else { // --- if click on day of current month ---
       }
-      this.calendar.currentDate = item;
-      this.calendar.selectedDate = item;
+      this.calendar.currentDate = parseInt(item.day, 10);
+      this.calendar.selectedDate = parseInt(item.day,10);
       this.calendar.selectedMonth = this.calendar.currentMonth;
       this.calendar.selectedYear = this.calendar.currentYear;
-      
     } else if(this.calendar.calendarState === 'year') { // --- if click on month of year
       this.calendar.calendarState = 'month';
-      this.calendar.currentMonth = getMonthNomberByShortName(item);
-      this.calendar.selectedMonth = getMonthNomberByShortName(item);
+      this.calendar.currentMonth = getMonthNumberByShortName(item);
+      this.calendar.selectedMonth = getMonthNumberByShortName(item);
       this.calendar.selecterYear = this.calendar.currentMonth;
       this.calendar.activateCurrentCalendarState();
       
@@ -54,6 +53,20 @@ export class TdCalendar implements OnInit {
       this.calendar.activateCurrentCalendarState();
       
     } else {}
-  
+    
+  }
+
+  isItemActive(item) {
+    if(this.calendar.calendarState === 'age') {
+      return this.calendar.selectedYear === parseInt(item, 10);
+    } else if(this.calendar.calendarState === 'year') {
+      return this.calendar.selectedYear === this.calendar.currentYear
+	&& this.calendar.selectedMonth === parseInt(getMonthNumberByShortName(item), 10);
+    } else if(this.calendar.calendarState === 'month') {
+      return this.calendar.selectedYear === this.calendar.currentYear
+	&& this.calendar.selectedMonth === this.calendar.currentMonth
+	&& this.calendar.selectedDate === parseInt(item.day, 10)
+	&& item.current === true;
+    }
   }
 }

@@ -25,3 +25,7 @@ td {
 .none-active-days {
   color: grey;
 }
+
+.active-item {
+  background: white;
+}

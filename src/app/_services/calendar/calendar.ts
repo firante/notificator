@@ -168,9 +168,9 @@ export default class Calendar implements OnInit {
 
   todayDate() {
     const date = new Date();
-    this._currentDate = date.getDate();
-    this._currentMonth = date.getMonth();
-    this._currentYear = date.getFullYear();
+    this._currentDate = this._selectedDate = date.getDate();
+    this._currentMonth = this._selectedMonth = date.getMonth();
+    this._currentYear = this._selectedYear = date.getFullYear();
     this._calendarState = 'month';
     this.activateCurrentCalendarState();
   }

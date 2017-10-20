@@ -2,7 +2,7 @@
 		'days': item.day,
 		'days-header': !item.day,
 		'none-active-days': item.day && !item.current,
-		'td-year-body': getCalendarState() === 'year'
+		'td-year-body': getCalendarState() === 'year',
 		'active-item': isItemActive(item)}"
      *ngFor="let item of getTdItem()"
      (click)="dayClick(item)"> {{item.day || item}}
