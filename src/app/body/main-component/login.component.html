@@ -1,8 +1,24 @@
 <div class="login_container">
-  <form class="login_form" #loginForm="ngForm" (ngSubmit)="onSubmit($event, email.value, password.value)">
-    <input #email type="email" placeholder="email..." />
-    <input #password type="password" placeholder="passvord..." />
-    <input type="submit" class="submit" value="Log in"/>
+  <form [formGroup]="loginForm"
+	(ngSubmit)="onSubmit($event, loginForm.value)"
+	class="ui form">
+    
+    <div class="field">
+      <label for="login">login</label>
+      <input type="email"
+	     id="login"
+	     placeholder="email..."
+	     formControlName="email" />
+    </div>
+    <div class="field">
+      <label for="password">password</label>
+      <input type="password"
+	     id="password"
+	     placeholder="passvord..."
+	     formControlName="password"/>
+    </div>
+    
+    <button  type="submit" class="ui button">Log in</button>
   </form>
   <div class="login_register"><a routerLink="/register">Sign in</a></div>
   <div class="login_register"><a href="#">Forgot password?</a></div>

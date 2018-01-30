@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { getFullMonth, getShortDays } from '../../_services/helpers';
 import Calendar from '../../_services/calendar/calendar';
+import { TdCalendar } from './td.calendar';
 
 @Component ({
-    selector: 'calendar-component',
-    templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.css']
+  selector: 'calendar-component',
+  directives: [TdCalendar],
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.css']
 })
 
 export class CalendarComponent implements OnInit {

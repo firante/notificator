@@ -9,6 +9,7 @@ import { RegisterComponent } from './body/main-component/register.component';
 import { EventsComponent } from './body/main-component/events.component';
 import { HomeComponent } from './body/main-component/home.component';
 import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CalendarComponent } from './body/calendar/calendar.component';
@@ -30,6 +31,7 @@ const routes = [
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   declarations: [
