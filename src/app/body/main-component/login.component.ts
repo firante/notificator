@@ -13,7 +13,7 @@ import { LoginService } from '../../_services/login/login.service';
 @Component ({
   selector: 'login-component',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', "../../../../node_modules/semantic-ui/dist/semantic.min.css"]
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent {
@@ -33,6 +33,6 @@ export class LoginComponent {
     const password = this.loginForm.controls.password.value;
     const loginData = { email, password };
     console.log(loginData)
-    //this.loginService.login(loginData);
+    this.loginService.login(loginData);
   }  
 }

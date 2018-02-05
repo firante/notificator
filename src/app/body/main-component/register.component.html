@@ -1,9 +1,43 @@
 <div class="login_container">
-  <form class="login_form" #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value, email.value)">
-    <input #username type="text" placeholder="username..." />
-    <input #email type="email" placeholder="email..." />
-    <input #password type="password" placeholder="passvord..." />
-    <input #confirm_password type="password" placeholder="confirmation passvord..." />
-    <input type="submit" class="submit" value="Sign in"/>
+  <form [formGroup]="registerForm"
+  	(ngSubmit)="onSubmit($event)"
+  	class="ui form">
+    <div class="field">
+      <label for="username">username</label>
+      <input
+  	 type="text"
+  	 id="username"
+  	 placeholder="username..."
+  	 formControlName="username" />
+    </div>
+      
+    <div class="field">
+      <label for="email">email</label>
+      <input
+  	 type="email"
+  	 id="email"
+  	 placeholder="email..."
+  	 formControlName="email" />
+      <div
+	 *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.touched"
+	 class="ui red message"> Username is invalid </div>
+    </div>
+    <div class="field">
+      <label for="password">password</label>
+      <input
+  	 type="password"
+  	 id="pawwvord"
+  	 placeholder="password..."
+  	 formControlName="password" />
+    </div>
+    <div class="field">
+      <label for="confirm-password">confirm password</label>
+      <input
+  	 type="password"
+  	 id="confirm-password"
+  	 placeholder="confirm..."
+  	 formControlName="confirm-password" />
+    </div>
+    <button type="submit" class="ui button"> Sign in </button>
   </form>
 </div>

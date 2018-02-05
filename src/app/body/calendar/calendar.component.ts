@@ -6,7 +6,6 @@ import { TdCalendar } from './td.calendar';
 
 @Component ({
   selector: 'calendar-component',
-  directives: [TdCalendar],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })

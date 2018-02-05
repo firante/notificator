@@ -1,5 +1,16 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  Inject
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms'
+
 import { LoginService } from '../../_services/login/login.service';
+
 @Component ({
   selector: 'register-component',
   templateUrl: './register.component.html',
@@ -7,12 +18,22 @@ import { LoginService } from '../../_services/login/login.service';
 })
 
 export class RegisterComponent {
-
-  constructor(private loginService: LoginService) {}
+  registerForm: FormGroup;
   
-  onSubmit(e: any, username: any, password: any, email: any) {
+  constructor(private loginService: LoginService, @Inject(FormBuilder) fb: FormBuilder) {
+    this.registerForm = fb.group({
+      'username': ['',  Validators.required],
+      'email': ['',  Validators.required],
+      'password': ['',  Validators.required],
+      'confirm-password': ['',  Validators.required]
+    });
+    console.log(this.registerForm)
+  }
+  
+  onSubmit(e: any): void {
     e.preventDefault();
-    const loginData = { username, password, email };
-    this.loginService.auth(loginData);
+    console.log(this.registerForm)
+    //const loginData = { username, password, email };
+//    this.loginService.auth(loginData);
   }  
 }

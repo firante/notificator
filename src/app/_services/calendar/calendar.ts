@@ -65,7 +65,7 @@ export default class Calendar implements OnInit {
     return this._calendarState;
   }
 
-  set calendarState(calendarState: any) {
+  set calendarState(calendarState: string) {
     this._calendarState = calendarState;
   }
 
@@ -130,12 +130,12 @@ export default class Calendar implements OnInit {
 
   calculateAgeState() {
     try {
-      const ageState: string[] = [];
+      const ageState: string[][] = [];
       let firstYear: number = parseInt(this._currentYear, 10) - 17;
       for (let i = 0; i < 5; i++) {
 	const arrRow: string[] = [];
 	for (let j = 0; j < 7; j++) {
-	  arrRow.push(firstYear);
+	  arrRow.push(firstYear.toString());
 	  firstYear += 1;
 	}
 	ageState.push(arrRow);

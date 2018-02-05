@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { autoLogin, login } from '../../querys-and-mutations/querys.js';
-import { createUser } from '../../querys-and-mutations/mutations.js';
+import querys from '../../querys-and-mutations/querys';
+import mutations from '../../querys-and-mutations/mutations';
 
 @Injectable()
 
@@ -32,15 +32,15 @@ export class LoginService {
   
   auth({ username, password, email }: {username: string, password: string, email: string}) {
     const url = 'http://localhost:9999/graphql';
-    const body = createUser(username, email, password);
+    const body = mutations.createUser(username, email, password);
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
     
     this._http.post(url, body, { headers })
       .toPromise()
-      .then((res) => {
-	const result = res && res._body && JSON.parse(res._body);
+      .then(res => res.json())
+      .then((result) => {
 	const user = result.data.createUser;
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
@@ -60,15 +60,15 @@ export class LoginService {
   autoLogin () {
     const token = window.localStorage.getItem('token');
     const url = 'http://localhost:9999/graphql';
-    const body = autoLogin(token);
+    const body = querys.autoLogin(token);
     
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
     
     this._http.post(url, body, { headers })
       .toPromise()
-      .then((res) => {
-	const result = res && res._body && JSON.parse(res._body);
+      .then(res => res.json())
+      .then((result) => {
 	const user = result.data.user;
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
@@ -84,15 +84,15 @@ export class LoginService {
 
   login({ email, password }: {email: string, password: string }) {
     const url = 'http://localhost:9999/graphql';
-    const body = login(email, password);
+    const body = querys.login(email, password);
       
     const headers = new Headers();
     headers.append('Content-Type', 'application/graphql');
     
     this._http.post(url, body, { headers })
       .toPromise()
-      .then((res) => {
-	const result = res && res._body && JSON.parse(res._body);
+      .then(res => res.json())
+      .then((result) => {
 	const user = result.data.user;
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;

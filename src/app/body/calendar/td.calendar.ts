@@ -3,11 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { getMonthNumberByShortName } from '../../_services/helpers';
 import Calendar from '../../_services/calendar/calendar';
 
-@Component ({
-
-selector: '[td-calendar]',
-    templateUrl: './td.calendar.html',
-    styleUrls: ['./td.calendar.css']
+@Component ({ 
+ selector: '[td-calendar]',
+  templateUrl: './td.calendar.html',
+  styleUrls: ['./td.calendar.css']
 })
 
 export class TdCalendar implements OnInit {
@@ -43,7 +42,7 @@ export class TdCalendar implements OnInit {
       this.calendar.calendarState = 'month';
       this.calendar.currentMonth = getMonthNumberByShortName(item);
       this.calendar.selectedMonth = getMonthNumberByShortName(item);
-      this.calendar.selecterYear = this.calendar.currentMonth;
+      this.calendar.selectedYear = this.calendar.currentMonth;
       this.calendar.activateCurrentCalendarState();
       
     } else if(this.calendar.calendarState === 'age') { // --- if click on the year of age
@@ -56,12 +55,12 @@ export class TdCalendar implements OnInit {
     
   }
 
-  isItemActive(item) {
+  isItemActive(item: any) {
     if(this.calendar.calendarState === 'age') {
       return this.calendar.selectedYear === parseInt(item, 10);
     } else if(this.calendar.calendarState === 'year') {
       return this.calendar.selectedYear === this.calendar.currentYear
-	&& this.calendar.selectedMonth === parseInt(getMonthNumberByShortName(item), 10);
+	&& this.calendar.selectedMonth === getMonthNumberByShortName(item);
     } else if(this.calendar.calendarState === 'month') {
       return this.calendar.selectedYear === this.calendar.currentYear
 	&& this.calendar.selectedMonth === this.calendar.currentMonth
