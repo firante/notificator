@@ -1,6 +1,6 @@
 import {
   Component,
-  Inject
+  OnInit
 } from '@angular/core';
 
 import {
@@ -8,6 +8,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms'
+
+import validator from '../../helpers/validators';
 
 import { LoginService } from '../../_services/login/login.service';
 
@@ -17,17 +19,19 @@ import { LoginService } from '../../_services/login/login.service';
   styleUrls: ['./login.component.css']
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   
-  constructor(private loginService: LoginService, @Inject(FormBuilder) fb: FormBuilder) {
-    this.registerForm = fb.group({
-      'username': ['',  Validators.required],
-      'email': ['',  Validators.required],
-      'password': ['',  Validators.required],
-      'confirm-password': ['',  Validators.required]
+  constructor(private loginService: LoginService, private fb: FormBuilder) { }
+
+  ngOnInit() {
+    console.log(validator)
+    this.registerForm = this.fb.group({
+      'username': [null,  [Validators.required, Validators.minLength(3), Validators.maxLength(20), validator.username]],
+      'email': [null,  [Validators.required, validator.email]],
+      'password': [null,  [Validators.required, Validators.minLength(8)]],
+      'confirm-password': [null,  [Validators.required, Validators.minLength(8)]]
     });
-    console.log(this.registerForm)
   }
   
   onSubmit(e: any): void {

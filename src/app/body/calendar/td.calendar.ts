@@ -1,6 +1,7 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 
-import { getMonthNumberByShortName } from '../../_services/helpers';
+import { getMonthNumberByShortName } from '../../helpers/calendar.helpers';
 import Calendar from '../../_services/calendar/calendar';
 
 @Component ({ 

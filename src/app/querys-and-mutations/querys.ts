@@ -1,4 +1,4 @@
-const autoLogin = (token: string) => `{
+export const autoLogin = (token: string) => `{
   user(token: "${token}") {
     profile {
       token
@@ -7,7 +7,7 @@ const autoLogin = (token: string) => `{
   }
 }`;
 
-const login = (email: string, password: string) => `{
+export const login = (email: string, password: string) => `{
   user(email: "${email}", password: "${password}") {
     profile {
       token
@@ -16,4 +16,10 @@ const login = (email: string, password: string) => `{
   }
 }`;
 
-export default { autoLogin, login };
+export const getUserName = (username: string) => `{
+  user(username: "${username}") {
+    profile {
+      username
+    }
+  }
+}`;

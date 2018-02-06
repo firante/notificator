@@ -1,24 +1,27 @@
 <div class="login_container">
   <form [formGroup]="loginForm"
-	(ngSubmit)="onSubmit($event, loginForm.value)"
+	(ngSubmit)="onSubmit($event)"
 	class="ui form">
     
     <div class="field">
-      <label for="login">login</label>
-      <input type="email"
+      <label for="login">login *</label>
+      <input type="text"
 	     id="login"
 	     placeholder="email..."
 	     formControlName="email" />
     </div>
     <div class="field">
-      <label for="password">password</label>
+      <label for="password">password *</label>
       <input type="password"
 	     id="password"
 	     placeholder="passvord..."
 	     formControlName="password"/>
     </div>
-    
-    <button  type="submit" class="ui button">Log in</button>
+    <div *ngIf="!loginForm.valid" class="ui red message">Form is invalid</div>
+    <button
+       type="submit"
+       class="ui button"
+       [disabled]="!loginForm.valid">Log in</button>
   </form>
   <div class="login_register"><a routerLink="/register">Sign in</a></div>
   <div class="login_register"><a href="#">Forgot password?</a></div>

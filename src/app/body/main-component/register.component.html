@@ -38,6 +38,7 @@
   	 placeholder="confirm..."
   	 formControlName="confirm-password" />
     </div>
+    <div *ngIf="!registerForm.valid" class="ui red message">Form is invalid</div>
     <button type="submit" class="ui button"> Sign in </button>
   </form>
 </div>

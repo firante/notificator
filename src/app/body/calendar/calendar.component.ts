@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { getFullMonth, getShortDays } from '../../_services/helpers';
+import { getFullMonth, getShortDays } from '../../helpers/calendar.helpers';
 import Calendar from '../../_services/calendar/calendar';
 import { TdCalendar } from './td.calendar';
 
