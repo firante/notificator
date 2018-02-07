@@ -4,6 +4,4 @@ const EMAIL_REGEXP = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 const email = (c: AbstractControl) => EMAIL_REGEXP.test(c.value) ? null : { email: { valid: false } };
 
-const username = (c: AbstractControl) => console.log(c);
-
-export default { email, username };
+export default { email };

@@ -38,6 +38,6 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password').value;
     const loginData = { email, password };
     console.log(loginData)
-    this.loginService.login(loginData);
+//    this.loginService.login(loginData);
   }  
 }

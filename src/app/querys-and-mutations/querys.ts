@@ -23,3 +23,12 @@ export const getUserName = (username: string) => `{
     }
   }
 }`;
+
+export const isUsernameOrEmailExist = (data:any = {}) => `{
+  isUsernameOrEmailExist(username: "${data.username}", email: "${data.email}") {
+    profile {
+      username,
+      email
+    }
+  }
+}`;

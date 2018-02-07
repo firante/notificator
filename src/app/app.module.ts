@@ -15,6 +15,7 @@ import { HttpModule } from '@angular/http';
 import { CalendarComponent } from './body/calendar/calendar.component';
 import { TdCalendar } from './body/calendar/td.calendar';
 
+import { QueryService }  from './_services/querys';
 import { LoginService } from './_services/login/login.service';
 import Calendar  from './_services/calendar/calendar';
 
@@ -45,7 +46,7 @@ const routes = [
     CalendarComponent,
     TdCalendar
   ],
-  providers: [LoginService, Calendar],
+  providers: [LoginService, Calendar, QueryService],
   bootstrap: [ AppComponent ]
 })
 
