@@ -9,8 +9,19 @@
   	 id="username"
   	 placeholder="username..."
   	 formControlName="username" />
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.touched">Field must be filled!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.username.errors?.minlength && registerForm.controls.username.touched">This field must consists more then 3 charecters!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.username.errors?.maxlength && registerForm.controls.username.touched">This field must consists less then 20 characters!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.username.errors?.usernameExists && registerForm.controls.username.touched">This username already exsists!</div>
     </div>
-      
     <div class="field">
       <label for="email">email</label>
       <input
@@ -18,6 +29,12 @@
   	 id="email"
   	 placeholder="email..."
   	 formControlName="email" />
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.email.errors?.invalidEmail && registerForm.controls.email.touched">Email is invalid!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.email.errors?.emailExists && registerForm.controls.email.touched">This email already exsists!</div>
     </div>
     <div class="field">
       <label for="password">password</label>
@@ -26,16 +43,37 @@
   	 id="pawwvord"
   	 placeholder="password..."
   	 formControlName="password" />
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.touched">Field must be filled!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.password.errors?.minlength && registerForm.controls.password.touched">This field must consists more then 8 charecters!</div>
+
     </div>
+
     <div class="field">
-      <label for="confirm-password">confirm password</label>
+      <label for="confirmPassword">confirm password</label>
       <input
   	 type="password"
-  	 id="confirm-password"
+  	 id="confirmPassword"
   	 placeholder="confirm..."
-  	 formControlName="confirm-password" />
+  	 formControlName="confirmPassword" />
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.confirmPassword.errors?.required && registerForm.controls.confirmPassword.touched">Field must be filled!</div>
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.confirmPassword.errors?.minlength && registerForm.controls.confirmPassword.touched">This field must consists more then 8 charecters!</div>
+
+      <div
+	 class="validator"
+	 *ngIf="registerForm.controls.confirmPassword.errors?.MatchPassword && registerForm.controls.confirmPassword.touched">Passwords don't match!</div>
     </div>
-    <div *ngIf="!registerForm.valid" class="ui red message">Form is invalid</div>
-    <button type="submit" class="ui button"> Sign in </button>
+
+    <button
+       type="submit"
+       class="ui button"
+       [disabled]="!registerForm.valid"> Sign in </button>
   </form>
 </div>

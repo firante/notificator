@@ -5,7 +5,6 @@
 
 .login_container input {
   width: 100%;
-  margin: 5px 0;
 }
 
 .login_register {
@@ -15,11 +14,24 @@
   margin-top: 10px;
   text-align: left;
 }
+
 .login_register:last-child {
   text-align: right;
 }
+
 @media screen and (max-width: 997px) {
   .login_container {
     width: 80%;
   }
+}
+
+.ui.form .field {
+  height: 85px;
+  margin: 0;
+}
+
+.ui.form .field .validator {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: red;
 }

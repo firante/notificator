@@ -2,13 +2,17 @@
   <form [formGroup]="loginForm"
 	(ngSubmit)="onSubmit($event)"
 	class="ui form">
-    
+
     <div class="field">
       <label for="login">login *</label>
       <input type="text"
 	     id="login"
 	     placeholder="email..."
 	     formControlName="email" />
+      <div
+	 class="validator"
+	 *ngIf="loginForm.controls.email.errors?.invalidEmail && loginForm.controls.email.touched">Email is invalid!</div>
+
     </div>
     <div class="field">
       <label for="password">password *</label>
@@ -16,8 +20,14 @@
 	     id="password"
 	     placeholder="passvord..."
 	     formControlName="password"/>
+      <div
+	 class="validator"
+	 *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">Field must be filled!</div>
+      <div
+	 class="validator"
+	 *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched">This field must consists more then 8 charecters!</div>
+
     </div>
-    <div *ngIf="!loginForm.valid" class="ui red message">Form is invalid</div>
     <button
        type="submit"
        class="ui button"

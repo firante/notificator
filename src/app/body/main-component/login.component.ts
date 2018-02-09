@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit 
+  OnInit
 } from '@angular/core';
 
 import {
@@ -22,14 +22,16 @@ import { LoginService } from '../../_services/login/login.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  
+
   constructor(private loginService: LoginService, private fb: FormBuilder) { }
 
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      'email': [null, [Validators.required, validator.email]],
-      'password': [null, Validators.required]
+      'email': [null],
+      'password': [null, [Validators.required, Validators.minLength(8)]]
+    }, {
+      validator: validator.email
     });
   }
   onSubmit(e: any): void {
@@ -37,7 +39,6 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     const loginData = { email, password };
-    console.log(loginData)
-//    this.loginService.login(loginData);
-  }  
+    this.loginService.login(loginData);
+  }
 }
