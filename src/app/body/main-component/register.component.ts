@@ -50,6 +50,6 @@ export class RegisterComponent implements OnInit {
 	v.profile.email === email && this.registerForm.get('email').setErrors({'emailExists': true});
       }));
     const loginData = { username, password, email };
-    this.loginService.auth(loginData);
+    this.loginService.registerUser(loginData);
   }
 }

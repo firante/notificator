@@ -20,5 +20,12 @@ export class QueryService {
       .catch((err: any) => console.log(err));
   });
     
-
+  registerUser = (data: any) => new Promise((resolve, reject) => {
+    const body = mutations.createUser(data.username, data.email, data.password);
+    this._http.post(URL, body, { headers })
+      .toPromise()
+      .then((res: any) => res.json)
+      .then((result) => resolve(result.data.user))
+      .catch((err: any) => console.log(err))
+  });
 }

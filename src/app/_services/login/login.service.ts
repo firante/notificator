@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { autoLogin, login } from '../../querys-and-mutations/querys';
 import mutations from '../../querys-and-mutations/mutations';
 
+import { QueryService } from '../querys';
+
 @Injectable()
 
 export class LoginService {
@@ -12,7 +14,7 @@ export class LoginService {
   private _token: string = '';
   private _username: string = '';
   
-  constructor(private _http: Http, private router: Router) {}
+  constructor(private _http: Http, private router: Router, private _query: QueryService) {}
   
   get loggedIn(): boolean {
     return this._loggedIn;
@@ -30,18 +32,9 @@ export class LoginService {
     return { loggedIn: this._loggedIn, token: this._token, username: this._username };
   }
   
-  auth({ username, password, email }: {username: string, password: string, email: string}) {
-    const url = 'http://localhost:9999/graphql';
-    const body = mutations.createUser(username, email, password);
-
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/graphql');
-    
-    this._http.post(url, body, { headers })
-      .toPromise()
-      .then(res => res.json())
-      .then((result) => {
-	const user = result.data.createUser;
+  registersUser(data: any) {
+    this._query.registersUser(data)
+      .then((user) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -49,12 +42,11 @@ export class LoginService {
 	  window.localStorage.setItem('token', user.profile.token);
 	  this.router.navigate(['/home']);
 	} else if (user && user.status)	{
-	   console.log(user.status);
+	  console.log(user.status);
 	} else {
 	  console.log('Registration failed!');
 	}
-      })
-      .catch(err => console.log(err));
+      });    
   }
 
   autoLogin () {
