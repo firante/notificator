@@ -1,5 +1,5 @@
 export const autoLogin = (token: string) => `{
-  user(token: "${token}") {
+  autoLogin(token: "${token}") {
     profile {
       token
       username
@@ -8,7 +8,7 @@ export const autoLogin = (token: string) => `{
 }`;
 
 export const login = (email: string, password: string) => `{
-  user(email: "${email}", password: "${password}") {
+  login(email: "${email}", password: "${password}") {
     profile {
       token
       username
@@ -32,3 +32,4 @@ export const isUsernameOrEmailExist = (data:any = {}) => `{
     }
   }
 }`;
+
