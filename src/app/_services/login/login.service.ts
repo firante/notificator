@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { autoLogin, login } from '../../querys-and-mutations/querys';
-import mutations from '../../querys-and-mutations/mutations';
-
 import { QueryService } from '../querys';
 
 @Injectable()
@@ -31,7 +28,8 @@ export class LoginService {
   get authObj(): any {
     return { loggedIn: this._loggedIn, token: this._token, username: this._username };
   }
-  
+
+  // --- sign in user method, shoud receives (username, email, password) ---
   registersUser(data: any) {
     this._query.registersUser(data)
       .then((user) => {
@@ -49,19 +47,10 @@ export class LoginService {
       });    
   }
 
+  // --- autologin user method by token, should receive token from local storage. Token will be expired after 7 days ---
   autoLogin () {
-    const token = window.localStorage.getItem('token');
-    const url = 'http://localhost:9999/graphql';
-    const body = autoLogin(token);
-    
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/graphql');
-    
-    this._http.post(url, body, { headers })
-      .toPromise()
-      .then(res => res.json())
-      .then((result) => {
-	const user = result.data.user;
+    this._query.autoLogin()
+      .then((user) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -70,22 +59,13 @@ export class LoginService {
 	} else {
 	  console.log('There is no valid token!');
 	}
-      })
-      .catch(err => console.log(err));
+      });
   }
 
-  login({ email, password }: {email: string, password: string }) {
-    const url = 'http://localhost:9999/graphql';
-    const body = login(email, password);
-      
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/graphql');
-    
-    this._http.post(url, body, { headers })
-      .toPromise()
-      .then(res => res.json())
-      .then((result) => {
-	const user = result.data.user;
+  // --- login user method, should receive email and password --- 
+  login(data: any) {
+    this._query.login(data)
+      .then((user) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -95,8 +75,7 @@ export class LoginService {
 	} else {
 	  console.log('Login or password are incorrect!');
 	}
-      })
-      .catch(err => console.log(err));
+      });
   }
 
   logout() {
