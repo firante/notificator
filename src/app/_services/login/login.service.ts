@@ -10,13 +10,13 @@ export class LoginService {
   private _loggedIn: boolean = false;
   private _token: string = '';
   private _username: string = '';
-  
+
   constructor(private _http: Http, private router: Router, private _query: QueryService) {}
-  
+
   get loggedIn(): boolean {
     return this._loggedIn;
   }
-  
+
   get token(): string {
     return this._token;
   }
@@ -31,8 +31,10 @@ export class LoginService {
 
   // --- sign in user method, shoud receives (username, email, password) ---
   registersUser(data: any) {
-    this._query.registersUser(data)
+    console.log(data)
+    this._query.registerUser(data)
       .then((user) => {
+	console.log(user)
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -44,7 +46,7 @@ export class LoginService {
 	} else {
 	  console.log('Registration failed!');
 	}
-      });    
+      });
   }
 
   // --- autologin user method by token, should receive token from local storage. Token will be expired after 7 days ---
@@ -62,7 +64,7 @@ export class LoginService {
       });
   }
 
-  // --- login user method, should receive email and password --- 
+  // --- login user method, should receive email and password ---
   login(data: any) {
     this._query.login(data)
       .then((user) => {
