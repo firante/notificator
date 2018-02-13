@@ -30,11 +30,9 @@ export class LoginService {
   }
 
   // --- sign in user method, shoud receives (username, email, password) ---
-  registersUser(data: any) {
-    console.log(data)
+  registerUser(data: any) {
     this._query.registerUser(data)
-      .then((user) => {
-	console.log(user)
+      .then((user:any) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -52,7 +50,7 @@ export class LoginService {
   // --- autologin user method by token, should receive token from local storage. Token will be expired after 7 days ---
   autoLogin () {
     this._query.autoLogin()
-      .then((user) => {
+      .then((user: any) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;
@@ -67,7 +65,7 @@ export class LoginService {
   // --- login user method, should receive email and password ---
   login(data: any) {
     this._query.login(data)
-      .then((user) => {
+      .then((user: any) => {
 	if(user && user.profile && user.profile.token) {
 	  this._loggedIn = true;
 	  this._token = user.profile.token;

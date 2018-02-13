@@ -26,7 +26,7 @@ export class QueryService {
 
   // --- register user mutation ---
   registerUser = (data: any) => new Promise((resolve, reject) => {
-    const body = mutations.createUser(data.username, data.email, data.password);
+    const body = createUser(data.username, data.email, data.password);
     this._http.post(URL, body, { headers })
       .toPromise()
       .then((res: any) => res.json)
@@ -34,11 +34,11 @@ export class QueryService {
       .catch((err: any) => console.log(err));
   });
 
-  // --- auto login user query ( if token is valid) --- 
+  // --- auto login user query ( if token is valid) ---
   autoLogin = () => new Promise((resolve, reject) => {
     const token = window.localStorage.getItem('token');
     const body = autoLogin(token);
-    this._http.post(url, body, { headers })
+    this._http.post(URL, body, { headers })
       .toPromise()
       .then(res => res.json())
       .then((result) => resolve(result.data.user))
@@ -46,13 +46,12 @@ export class QueryService {
   });
 
   // --- login user query ---
-  login = (data) => new Promise((resolve, reject) => {
+  login = (data: any) => new Promise((resolve, reject) => {
     const body = login(data.email, data.password);
-    this._http.post(url, body, { headers })
+    this._http.post(URL, body, { headers })
       .toPromise()
       .then(res => res.json())
       .then((result) => resolve(result.data.user))
       .catch(err => console.log(err));
   });
 }
-  

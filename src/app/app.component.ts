@@ -9,7 +9,9 @@ import '../assets/css/styles.css';
 })
 
 export class AppComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
+
+
   ngOnInit() {
     this.loginService.autoLogin();
   }

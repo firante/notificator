@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function getFullMonth(month) {
+    if (isNaN(+month) || +month > 11 || +month < 0)
+        return false;
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
     return months[parseInt(month, 10)];
